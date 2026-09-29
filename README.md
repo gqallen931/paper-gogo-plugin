@@ -123,6 +123,36 @@ overlay 只贡献配置，不改变 loader 解析模块路径时使用的 profil
 
 在会话里让模型调用一次 `paper_doctor`。它应当报告 `usable: true`、`内容来源：插件自带`。若为 `false`，按它输出的修复方法处理。
 
+### ⚠️ Windows 用户：先开长路径支持
+
+从 GitHub 克隆本插件时，**默认的 Windows 路径长度限制（260 字符）会导致检出失败**。内置的框架图技能里有很长的文件名，例如：
+
+```text
+workflow/skills/paper-framework-figure-studio-pro/assets/vector-library/iclr_reference_library/paper_derived_icon_refinement/cut_svg/paper.derived.architecture.privacy.secure.aggregation.paper_derived_outline.v1.svg
+```
+
+该相对路径本身就有 215 字符，一旦克隆到稍深的目录就会超过上限。症状是仓库克隆成功但检出失败，报 `Filename too long`，并且插件目录里缺少文件。
+
+三种解决办法，任选其一：
+
+```powershell
+# 1) 单次克隆时开启（最快）
+git -c core.longpaths=true clone https://github.com/gqallen931/paper-gogo-plugin.git
+
+# 2) 永久为本机 git 开启
+git config --global core.longpaths true
+```
+
+```powershell
+# 3) 系统级开启（需管理员 PowerShell，一次即可，随后所有程序都受益）
+New-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem' `
+  -Name LongPathsEnabled -Value 1 -PropertyType DWORD -Force
+```
+
+> 说明：`core.longpaths` 是本地配置，**在克隆过程中尚未生效**，因此 `git config --global core.longpaths true` 必须在克隆**之前**执行；否则请用第 1 种的一次性写法。安装本插件（`dsh plugin add`）走的是 pnpm 链接或本地目录，不经 `git clone`，不受此影响。
+
+同样的限制也适用于 Paper-gogo 包中 `paper-framework-figure-studio-pro/assets/` 下的全部资源。
+
 ---
 
 ## 5. 配置
