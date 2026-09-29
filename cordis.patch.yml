@@ -1,0 +1,26 @@
+# Patch layer contributed by the dsh-paper-gogo-plugin bundle.
+#
+# This is a top-level YAML array of loader patch entries, identical in shape to a
+# `--patch` overlay. The plugin row references the package by name so Node module
+# resolution can find the installed code once the bundle is installed into a
+# profile with `dsh plugin --profile <name> add <this-directory>`.
+#
+# The plugin is SELF-CONTAINED: it ships the Paper-gogo workflow and 57 skills in
+# its own `workflow/` directory, so no external Paper-gogo package is required.
+# The config below is therefore optional and only relevant if you want to
+# override the shipped defaults.
+- insert:
+    - id: paper-gogo
+      name: dsh-paper-gogo-plugin
+      config:
+        # true (default): use the workflow copy shipped inside this plugin.
+        # false: prefer an externally installed Paper-gogo package, located via
+        #        `root`, then DSH_PAPER_GOGO_ROOT, then an upward search from the
+        #        session working directory, then `searchRoots`.
+        preferBundled: true
+        # Only used when preferBundled is false.
+        root: null
+        searchRoots: []
+        # Directory (relative to the resolved workflow root unless absolute) that
+        # receives the phase journal written by the paper_phase_log tool.
+        journalDir: docs/项目工作阶段记录

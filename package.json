@@ -1,0 +1,50 @@
+{
+  "name": "dsh-paper-gogo-plugin",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Expose the Paper-gogo evidence-first paper workflow (18 Phase, G0-G6 gates, four-state evidence audit) as DeepSeek Harness tools.",
+  "license": "MIT",
+  "main": "src/plugin.js",
+  "exports": {
+    ".": "./src/plugin.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src",
+    "workflow",
+    "examples",
+    "cordis.patch.yml",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "devDependencies": {
+    "@deepseek-ai/cordis": "~4.0.4",
+    "@deepseek-ai/dsh-tools": "0.1.7-alpha.2",
+    "yaml": "^2.9.1"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "~4.0.4",
+    "@deepseek-ai/dsh-tools": "0.1.7-alpha.2"
+  },
+  "scripts": {
+    "test": "node test/run-tests.mjs",
+    "verify": "node test/verify-against-dsh-tools.mjs",
+    "build:index": "node scripts/build-skills-index.mjs",
+    "check:bundle": "node test/check-bundle.mjs"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "paper-gogo",
+    "academic-writing"
+  ]
+}

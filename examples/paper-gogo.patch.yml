@@ -1,0 +1,17 @@
+# Local development overlay for the desktop / source-installed harness.
+#
+#   pnpm dsh web --patch ./examples/paper-gogo.patch.yml     # source checkout
+#   dsh web --patch ./examples/paper-gogo.patch.yml          # installed CLI
+#
+# A `--patch` overlay only contributes configuration. Plugin paths here are
+# absolute, which is what an overlay requires; the bundle manifest in
+# `cordis.patch.yml` is the installable form and references the package by name
+# instead.
+- insert:
+    - id: paper-gogo
+      name: 'D:\Skills\paper-gogo-plugin\src\plugin.js'
+      config:
+        # Self-contained: the plugin reads the workflow and skills it ships in
+        # its own workflow/ directory. No external Paper-gogo package needed.
+        preferBundled: true
+        journalDir: docs/项目工作阶段记录
