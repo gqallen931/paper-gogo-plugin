@@ -1,5 +1,9 @@
 # dsh-paper-gogo-plugin
 
+[![dsh-plugin](https://img.shields.io/badge/topic-dsh--plugin-0969da)](https://github.com/topics/dsh-plugin)
+[![deepseek-harness](https://img.shields.io/badge/DeepSeek%20Harness-plugin-0969da)](https://github.com/deepseek-ai/deepseek-harness)
+[![license: MIT](https://img.shields.io/badge/license-MIT-green)](package.json)
+
 把 [Paper-gogo](https://github.com/gqallen931/paper-gogo)（审稿人倒推、证据优先的学术论文工作流）开发为 **DeepSeek Harness 插件**：工作流的 18 个 Phase、7 道质量门禁、四态证据标签与命令系统，全部变成模型可直接调用的原生工具。
 
 **插件是自包含的** —— 它自带完整的 Paper-gogo 工作流正文与 **57 个技能**，安装即可使用，**不需要另外安装 Paper-gogo 包**。
